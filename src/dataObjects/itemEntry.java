@@ -1,20 +1,22 @@
+package dataObjects;
+
 import java.util.*;
 import static java.lang.System.out;
 public class itemEntry {
     String itemName;
     int itemNumber;
-    float itemPrice;
+    double itemPrice;
     boolean isCredit;
     String paymentMethod;
 
     /**
      * Default class constructor all items set to null.
      */
-    itemEntry()
+    public itemEntry()
     {
         this.itemName = null;
-        this.itemNumber = Integer.parseInt(null);
-        this.itemPrice = Float.parseFloat(null);
+        this.itemNumber = 0;
+        this.itemPrice =  0.00;
         this.isCredit = false;
         this.paymentMethod = null;
     }
@@ -28,7 +30,7 @@ public class itemEntry {
      * @param pymntMethod the method payment used to make the purchase
      */
     public itemEntry(String iName, int iNum,
-                     float iPrice, boolean isC,
+                     double iPrice, boolean isC,
                      String pymntMethod)
     {
         this.itemName = iName;
@@ -38,59 +40,92 @@ public class itemEntry {
         this.paymentMethod = pymntMethod;
     }
 
+    /**
+     * Copy constructor, pass in an item of the class type
+     * to copy its values.
+     * @param item the item we wish to copy.
+     */
+    public itemEntry(itemEntry item) {
+        this.itemName = item.itemName;
+        this.itemNumber = item.itemNumber;
+        this.itemPrice = item.itemPrice;
+        this.isCredit = item.isCredit;
+        this.paymentMethod = item.paymentMethod;
+    }
+
 
     /**
      * Setters
      */
 
-    void setItemName(String itName)
+    public void setItemName(String itName)
     {
         this.itemName = itName;
     }
 
 
-    void setItemNumber(int itNum)
+    public void setItemNumber(int itNum)
     {
         this.itemNumber = itNum;
     }
 
 
-    void setItemPrice(float itPrice)
+   public void setItemPrice(double itPrice)
     {
         this.itemPrice = itPrice;
     }
 
 
-    void setCredit(boolean isC)
+    public void setCredit(boolean isC)
     {
         this.isCredit = isC;
     }
 
 
+    public void setPaymentMethod(String payment)
+    {
+        this.paymentMethod = payment;
+    }
     /**
      * Getters
      */
-    String getItemName()
+    public String getItemName()
     {
         return this.itemName;
     }
 
 
-    int getItemNumber()
+    public int getItemNumber()
     {
         return this.itemNumber;
     }
 
 
-    float getItemPrice()
+    public double getItemPrice()
     {
         return this.itemPrice;
     }
 
 
-    boolean getCredit()
+    public boolean getCredit()
     {
         return this.isCredit;
+    }
+
+
+    /**
+     * helpers
+     */
+
+    /**
+     * Have an itemEntry object display its data values.
+     */
+    public void display()
+    {
+        out.println(
+                this.itemName + "\t" + this.itemNumber + "\t" + this.itemPrice
+                + "\t" + this.paymentMethod + "\t" + (this.isCredit ? "(+)" : "(-)")
+        );
     }
 
 
