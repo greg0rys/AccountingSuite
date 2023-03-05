@@ -25,9 +25,10 @@ public class creditCard extends Account
         cardLimit = lim;
     }
 
-    public creditCard(String name, String type, double ... nums)
+    public creditCard(String name, String type, int acctNum, double bal)
     {
-        super(name,type,nums[0],nums[1]);
+        super(name,type,acctNum,bal);
+        getCardData(); // let the gui prompt the user for the accounts info.
 
     }
 
