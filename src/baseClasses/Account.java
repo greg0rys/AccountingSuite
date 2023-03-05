@@ -1,27 +1,37 @@
 package baseClasses;
 
+import java.util.ArrayList;
+
 import static java.lang.System.out;
 
 public class Account
 {
     private String accountName;
-    private double accountNum;
     private String accountType;
+
+    private int fullAcctNum;
+    private ArrayList<Integer> accountNum; // split the account num into a dynamic array to output last 4 digits.
+
     private double accountBalance;
 
     public Account()
     {
         accountName = accountType = null;
-        accountNum = accountBalance = 0.00;
+        accountBalance = 0.00;
+        accountNum = null;
+        fullAcctNum = 0;
     }
 
-    public Account(String name, String type, double ... nums)
+    public Account(String name, String type,
+                   int acctNum, double bal)
     {
         accountName = name;
         accountType = type;
-        accountNum = nums[0];
-        accountBalance = nums[1];
-
+        fullAcctNum = acctNum;
+        // split the account number into a dynamic array
+        // this way we can output just the last 4 digits in the jTable.
+        accountNum = split(acctNum);
+        accountBalance = bal;
     }
 
     public String getAccountName()
@@ -34,9 +44,9 @@ public class Account
         return accountType;
     }
 
-    public double getAccountNum()
+    public int getAccountNum()
     {
-        return accountNum;
+        return fullAcctNum;
     }
 
     public double getAccountBalance()
@@ -54,11 +64,24 @@ public class Account
         accountType = type;
     }
 
-    public void setAccountNum(double acctNum)
+    public void setAccountNum(int acctNum)
     {
-        accountNum = acctNum;
+        fullAcctNum = acctNum;
+        accountNum = split(acctNum);
     }
 
+    private ArrayList<Integer> split(int num)
+    {
+        ArrayList<Integer> temp = new ArrayList<>();
+
+        while(num > 0)
+        {
+            temp.add((num % 10));
+            num /= 10;
+        }
+
+        return temp;
+    }
     public void setAccountBalance(double bal)
     {
         accountBalance = bal;
@@ -66,11 +89,38 @@ public class Account
 
     public void display()
     {
-        out.format(
-                accountName + "\n\tAccount Type: " + accountType
-                + "\n\tAccount number: " + accountNum + "\n\tAccount Balance: %d",
-                accountBalance
-        );
+        out.println(getFormattedInfo());
+    }
+
+
+    /**
+     * Format the accounts info to display the account balance in proper format
+     * @return a string containing all the account info in a formatted way.
+     */
+    private String getFormattedInfo()
+    {
+        String info = "Account: " + accountName
+                       + "\n\tType: " + accountType
+                       + "\n\tLast 4 of Account Number: " + getLastFour()
+                       + "\n\t";
+        info += String.format("The account balance is: .2%f", accountBalance);
+        return info;
+
+    }
+
+    private int getLastFour()
+    {
+        int x;       // loop variable saves the compiler some time declaring it ahead.
+        int res = 0; // the result holding out last four.
+
+                     // get the last four of the acct num using base 10 tactics.
+        for(x = accountNum.size() - 4; x < accountNum.size(); x++)
+        {
+            res *= 10;
+            res += accountNum.get(x);
+        }
+
+        return res;
     }
 
 
