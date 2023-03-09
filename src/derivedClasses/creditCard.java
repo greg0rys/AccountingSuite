@@ -2,18 +2,17 @@ package derivedClasses;
 import baseClasses.Account;
 import static java.lang.System.out;
 
-public class creditCard extends Account
-{
+public class creditCard extends Account {
     private String cardType;
-    private double cardLimit;
-    public creditCard()
-    {
-        super(null,null,0,0);
+
+
+    public creditCard() {
+        super(null, null, 0, 0);
         cardType = null;
-        cardLimit = 0.00;
+
     }
-   public creditCard(Account acct, String type, double lim)
-    {
+
+    public creditCard(Account acct, String type) {
         super(
                 acct.getAccountName(),
                 acct.getAccountType(),
@@ -22,26 +21,16 @@ public class creditCard extends Account
         ); // init the base classes fields
 
         cardType = type;
-        cardLimit = lim;
     }
 
-    public creditCard(String name, String type, int acctNum, double bal)
-    {
-        super(name,type,acctNum,bal);
-        getCardData(); // let the gui prompt the user for the accounts info.
+    public creditCard(String name, String type, int acctNum, double bal) {
+        super(name, type, acctNum, bal);
+        getCardData(); // let the gui prompt the user for the account's info.
 
     }
 
-    @Override
-    public void display()
+    private void getCardData()
     {
-        String bal,lim;
-        bal = String.format("The account balance is: .2%f",getAccountBalance());
-        lim = String.format("This cards limit is: .2%f", cardLimit);
-
-        out.println(
-                ""
-        )
-
+        out.println("gui will handle this");
     }
 }

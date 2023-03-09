@@ -15,7 +15,11 @@
 
 package baseClasses;
 
-import java.util.ArrayList;
+import dataObjects.TransactionManager;
+import dataObjects.itemEntry;
+import derivedClasses.bankAccount;
+
+import java.util.*;
 
 import static java.lang.System.out; // shorthand System.out.println
 
@@ -25,22 +29,31 @@ public class Account {
 
     private int fullAcctNum;
     private int last4Acct;
-    private double accountBalance;
 
-    public Account() {
+    private double accountBalance;
+    private double accountLimit;
+    TransactionManager manager; // a hashset that manages all the transactions of a given account.
+
+    public Account()
+    {
         accountName = accountType = null;
         accountBalance = 0.00;
         last4Acct = 0;
         fullAcctNum = 0;
+        manager = null;
     }
 
-    public Account(String name, String type,
-                   int acctNum, double bal) {
+    public Account(String name,
+                   String type,
+                   int acctNum,
+                   double bal)
+    {
         accountName = name;
         accountType = type;
         fullAcctNum = acctNum;
         last4Acct = split(acctNum);
         accountBalance = bal;
+        manager = null;
     }
 
     /**
@@ -162,6 +175,18 @@ public class Account {
 
 
     /**
+     * Return the total number of transactions in the application.
+     * @return a whole number representing the number of transactions.
+     */
+    public int getNumTransactions()
+    {
+        if(manager == null)
+            return 0;
+
+        return manager.getTransactionCount();
+    }
+
+    /**
      * display the accounts info in a formatted way.
      */
     public void display() {
@@ -181,6 +206,72 @@ public class Account {
         info += String.format("The account balance is: .2%f", accountBalance);
         return info;
 
+    }
+
+    /**
+     * Add a transaction to the set while also keeping track of its type.
+     * If it is a credit add it to credits set else add to debits set
+     * This will allow quick sorting of the different types of transactions.
+     * @param it an itemEntry object
+     * @return true if the item was added, false if else.
+     */
+    public boolean addTransaction(itemEntry it)
+    {
+        // perform balance checks on the account to make sure we don't go over the credit limit or draw the account
+        // negative.
+        if(accountType.equals("Bank Account"))
+        {
+            if(checkNegative(it.getItemPrice()))
+                return false;
+        }
+        else if(accountType.equals("Credit"))
+        {
+            // check over limit
+            if(overLimit(it.getItemPrice()))
+                return false;
+        }
+
+        if(manager == null)
+            manager = new TransactionManager();
+
+        return manager.addItem(it, it.getCredit());
+    }
+
+
+    private boolean checkNegative(double amount)
+    {
+        return accountBalance == 0 || accountBalance - amount <= 0;
+    }
+
+
+    private boolean overLimit(double amount)
+    {
+        return accountBalance > accountLimit || (accountBalance + amount) > accountLimit;
+    }
+    /**
+     * Get an array of recent deposits to the account.
+     * @return an array of all deposits to this account
+     *         if the deposit set is null or empty, returns null
+     */
+    public itemEntry[] getCredits()
+    {
+        if(manager == null)
+            return null;
+
+        return manager.getCredits();
+
+    }
+
+    /**
+     * return an array of all debits to the account
+     * @return an array of itemEntry objects - null if no transaction manager is active.
+     */
+    public itemEntry[] getDebits()
+    {
+        if(manager == null)
+            return null;
+
+        return manager.getDebits();
     }
 
 

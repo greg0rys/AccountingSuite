@@ -7,7 +7,7 @@ public class bankAccount extends Account
 
     public bankAccount()
     {
-        super(null,null,0,0.00);
+        super(null,null,0,0.00,0);
         bankName = null;
     }
 
@@ -17,11 +17,17 @@ public class bankAccount extends Account
                 act.getAccountName(),
                 act.getAccountType(),
                 act.getAccountNum(),
-                act.getAccountBalance()
+                act.getAccountBalance(),
+                act.getNumTransactions()
         );
         bankName = name;
     }
 
+    /**
+     * Make a withdrawl from the account, and set the base objects balance.
+     * @param amount the amount we wish to detract from the account
+     * @return true if account balance will still be >= 0 after the withdrawal, false if else.
+     */
     public boolean withdrawl(double amount)
     {
         if(checkNegative(amount))
@@ -32,12 +38,16 @@ public class bankAccount extends Account
     }
 
 
+    /**
+     * Check to see if a withdrawal from this account will
+     * @param amount the amount we wish to detract from this account
+     * @return true if the account balance will fall below zero - false if else.
+     */
     private boolean checkNegative(double amount)
     {
-        double currentBalance = getAccountBalance();
-        if(currentBalance == 0 || currentBalance - amount <= 0)
-            return true;
-        return false;
+        // get the account balance to only call for it once, but perform two checks on it.
+        double accountBalance = getAccountBalance();
+        return accountBalance == 0 || accountBalance - amount <= 0;
     }
 
 
