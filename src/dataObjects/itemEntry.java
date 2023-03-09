@@ -8,6 +8,7 @@ public class itemEntry {
     double itemPrice;
     boolean isCredit;
     String paymentMethod;
+    int accountNum; // the account number the item belongs to
 
     /**
      * Default class constructor all items set to null.
@@ -31,13 +32,14 @@ public class itemEntry {
      */
     public itemEntry(String iName, int iNum,
                      double iPrice, boolean isC,
-                     String pymntMethod)
+                     String pymntMethod, int actNum)
     {
         this.itemName = iName;
         this.itemNumber = iNum;
         this.itemPrice = iPrice;
         this.isCredit = isC;
         this.paymentMethod = pymntMethod;
+        this.accountNum = actNum;
     }
 
     /**

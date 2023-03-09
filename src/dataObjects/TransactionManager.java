@@ -1,8 +1,15 @@
 package dataObjects;
 import static java.lang.System.out;
+
+import java.util.HashSet;
 import java.util.Set;
 
 public class TransactionManager {
+    private class node
+    {
+        itemEntry data;
+
+    }
     private Set<itemEntry> transactions;
     private int            transactionCount;
 
@@ -14,7 +21,8 @@ public class TransactionManager {
 
     public TransactionManager(Set<itemEntry> trans, int count)
     {
-        transactions = trans;
+        // use HashSet copy constructor
+        transactions = new HashSet<>(trans);
         transactionCount = count;
     }
 
@@ -22,6 +30,9 @@ public class TransactionManager {
     public boolean addTransaction(itemEntry it)
     {
         if(transactions == null)
-            transactions = new Set();
+            transactions = new HashSet<>();
+
+        transactions.add(it);
+        return true;
     }
 }
