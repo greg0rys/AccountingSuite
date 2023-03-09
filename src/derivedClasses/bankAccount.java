@@ -7,7 +7,7 @@ public class bankAccount extends Account
 
     public bankAccount()
     {
-        super(null,null,0,0.00,0);
+        super(null,null,0,0.00);
         bankName = null;
     }
 
@@ -17,47 +17,44 @@ public class bankAccount extends Account
                 act.getAccountName(),
                 act.getAccountType(),
                 act.getAccountNum(),
-                act.getAccountBalance(),
-                act.getNumTransactions()
+                act.getAccountBalance()
         );
         bankName = name;
     }
 
+    public boolean deposit(double amount)
+    {
+        super.setAccountBalance(getAccountBalance() + amount);
+        return true;
+    }
+
     /**
-     * Make a withdrawl from the account, and set the base objects balance.
-     * @param amount the amount we wish to detract from the account
-     * @return true if account balance will still be >= 0 after the withdrawal, false if else.
+     * Make a withdrawal from the account, check that the transaction doesn't make it negative.
+     * @param amount the amount to take out of the bank
+     * @return true if the user can withdraw false if else
      */
-    public boolean withdrawl(double amount)
+    public boolean withdraw(double amount)
     {
         if(checkNegative(amount))
             return false;
 
-        super.setAccountBalance(super.getAccountBalance() - amount);
+        super.setAccountBalance(getAccountBalance() - amount);
         return true;
     }
 
 
     /**
-     * Check to see if a withdrawal from this account will
-     * @param amount the amount we wish to detract from this account
-     * @return true if the account balance will fall below zero - false if else.
+     * Get the name of the bank that hosts this account
+     * @return a String representing the banks name.
      */
-    private boolean checkNegative(double amount)
+    public String getBankName()
     {
-        // get the account balance to only call for it once, but perform two checks on it.
-        double accountBalance = getAccountBalance();
-        return accountBalance == 0 || accountBalance - amount <= 0;
+        return bankName;
     }
 
 
-
-    public void deposit(double total)
+    public void getLastFive()
     {
-        super.setAccountBalance(super.getAccountBalance() + total);
+
     }
-
-
-
-
 }

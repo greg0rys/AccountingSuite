@@ -32,7 +32,7 @@ public class Account {
 
     private double accountBalance;
     private double accountLimit;
-    TransactionManager manager; // a hashset that manages all the transactions of a given account.
+    protected TransactionManager manager; // a hashset that manages all the transactions of a given account.
 
     public Account()
     {
@@ -238,13 +238,13 @@ public class Account {
     }
 
 
-    private boolean checkNegative(double amount)
+    protected boolean checkNegative(double amount)
     {
         return accountBalance == 0 || accountBalance - amount <= 0;
     }
 
 
-    private boolean overLimit(double amount)
+    protected boolean overLimit(double amount)
     {
         return accountBalance > accountLimit || (accountBalance + amount) > accountLimit;
     }
