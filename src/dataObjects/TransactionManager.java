@@ -1,7 +1,9 @@
 package dataObjects;
 import static java.lang.System.out;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class TransactionManager {
@@ -57,16 +59,12 @@ public class TransactionManager {
      * Get an array of itemEntry objects that gave a credit to an account.
      * @return an array representing all credits in the transaction manager
      */
-    public itemEntry[] getCredits()
+    public Set<itemEntry> getCredits()
     {
         if(credits.isEmpty())
             return null;
 
-
-        itemEntry[] it = new itemEntry[credits.size()];
-
-        credits.toArray(it);
-        return it;
+        return credits;
     }
 
 
@@ -74,17 +72,22 @@ public class TransactionManager {
      * Get an array of itemEntry objects that caused a debit to an account
      * @return an array of all debits in the transaction manager.
      */
-    public itemEntry[] getDebits()
+    public Set<itemEntry> getDebits()
     {
         if(debits.isEmpty())
             return null;
-        itemEntry[] it = new itemEntry[debits.size()];
-        debits.toArray(it);
 
-        return it;
+        return debits;
     }
 
 
+    public Set<itemEntry> getTransactions()
+    {
+        if(transactions == null)
+            return null;
+
+        return transactions;
+    }
 
     /**
      * Get the total number of transactions for an account
@@ -96,6 +99,16 @@ public class TransactionManager {
     }
 
 
+    public itemEntry getItem(int pos)
+    {
+        if(transactions == null)
+            return null;
+
+        itemEntry[] items = new itemEntry[transactions.size()];
+        transactions.toArray(items);
+
+        return items[pos] != null ? items[pos] : null;
+    }
 
 
 }

@@ -250,10 +250,10 @@ public class Account {
     }
     /**
      * Get an array of recent deposits to the account.
-     * @return an array of all deposits to this account
+     * @return an array list of all deposits to this account
      *         if the deposit set is null or empty, returns null
      */
-    public itemEntry[] getCredits()
+    public Set<itemEntry> getCredits()
     {
         if(manager == null)
             return null;
@@ -264,9 +264,9 @@ public class Account {
 
     /**
      * return an array of all debits to the account
-     * @return an array of itemEntry objects - null if no transaction manager is active.
+     * @return a HashSet of all debits for an account - null if no transaction manager is active.
      */
-    public itemEntry[] getDebits()
+    public Set<itemEntry> getDebits()
     {
         if(manager == null)
             return null;

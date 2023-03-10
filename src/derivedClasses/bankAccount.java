@@ -1,5 +1,11 @@
 package derivedClasses;
 import baseClasses.Account;
+import dataObjects.itemEntry;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class bankAccount extends Account
 {
@@ -53,8 +59,26 @@ public class bankAccount extends Account
     }
 
 
-    public void getLastFive()
+    /**
+     * Get a hash set of the last five transactions in this account
+     * @return a hashset containing the last 5 transactions.
+     */
+    public List<itemEntry> getLastFive()
     {
+        if(manager == null)
+            return null;
 
+        // turn the set into a list to quickly grab members
+        List<itemEntry> temp = new ArrayList<>(manager.getTransactions());
+        List<itemEntry> collection = new ArrayList<>();
+
+        // get the index of the start of the last five items in this list.
+        int idx = (temp.size() - 5);
+        for(; idx < temp.size(); idx++)
+        {
+            collection.add(temp.get(idx)); // add to the collection
+        }
+
+        return collection;
     }
 }
