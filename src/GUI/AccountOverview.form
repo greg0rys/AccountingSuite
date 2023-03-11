@@ -3,60 +3,80 @@
   <grid id="27dc6" binding="root" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="314" height="400"/>
+      <xy x="20" y="20" width="554" height="400"/>
     </constraints>
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="b98a5" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-        <margin top="0" left="0" bottom="0" right="0"/>
+      <grid id="b98a5" binding="buttonContainer" layout-manager="GridLayoutManager" row-count="1" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="2" left="4" bottom="2" right="4"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
-        <border type="none"/>
+        <properties>
+          <background color="-15056626"/>
+        </properties>
+        <border type="bevel-lowered" title="Navigation" title-justification="2">
+          <font name="DialogInput" size="12" style="3"/>
+          <title-color color="-7816338"/>
+        </border>
         <children>
-          <component id="d3b4c" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="d3b4c" class="javax.swing.JButton" binding="viewAcct">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <horizontalTextPosition value="11"/>
+              <text value="View Account"/>
+              <verticalTextPosition value="0"/>
             </properties>
           </component>
-          <component id="66a2e" class="javax.swing.JButton" binding="button2" default-binding="true">
+          <component id="66a2e" class="javax.swing.JButton" binding="addTransaction">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Add Transaction"/>
             </properties>
           </component>
-          <component id="60e54" class="javax.swing.JButton" binding="button3" default-binding="true">
+          <component id="60e54" class="javax.swing.JButton" binding="addAccount">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Add New Account"/>
+            </properties>
+          </component>
+          <component id="57bed" class="javax.swing.JButton" binding="searchTransactions">
+            <constraints>
+              <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Search Transactions"/>
+              <verticalAlignment value="0"/>
+              <verticalTextPosition value="0"/>
             </properties>
           </component>
         </children>
       </grid>
-      <component id="cb2ec" class="javax.swing.JList" binding="list1" default-binding="true">
+      <component id="cb2ec" class="javax.swing.JList" binding="AccountList">
         <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties/>
-      </component>
-      <component id="d8e57" class="javax.swing.JList" binding="list2" default-binding="true">
-        <constraints>
-          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="1" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
         <properties>
+          <layoutOrientation value="1"/>
+        </properties>
+      </component>
+      <component id="d8e57" class="javax.swing.JList" binding="AccountBalances">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="1" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <layoutOrientation value="1"/>
           <model/>
         </properties>
       </component>

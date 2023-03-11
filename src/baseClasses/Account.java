@@ -137,6 +137,10 @@ public class Account {
     }
 
 
+    public void setAccountLimit(double bal)
+    {
+        accountLimit = bal;
+    }
     /**
      * Split the full account number down to the last four digits.
      * @param num the number we wish to split down.
@@ -273,6 +277,7 @@ public class Account {
 
         return manager.getDebits();
     }
+
 
 
 }

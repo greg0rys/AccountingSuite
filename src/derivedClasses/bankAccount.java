@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static java.lang.System.out;
+
 public class bankAccount extends Account
 {
     private String bankName;
@@ -80,5 +82,13 @@ public class bankAccount extends Account
         }
 
         return collection;
+    }
+
+
+    @Override
+    public void display()
+    {
+        out.println(bankName);
+        super.display(); // display the rest of the account info in the base class.
     }
 }
