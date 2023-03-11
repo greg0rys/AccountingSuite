@@ -2,6 +2,7 @@ import GUI.AccountOverview;
 import dataObjects.*;
 
 import javax.swing.*;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.IntStream;
 
@@ -35,6 +36,8 @@ public class Main {
             try {
                 JFrame overview = new AccountOverview();
             } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
         });

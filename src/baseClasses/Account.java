@@ -28,7 +28,6 @@ public class Account {
     private String accountType;
 
     private int fullAcctNum;
-    private int last4Acct;
 
     private double accountBalance;
     private double accountLimit;
@@ -38,7 +37,6 @@ public class Account {
     {
         accountName = accountType = null;
         accountBalance = 0.00;
-        last4Acct = 0;
         fullAcctNum = 0;
         manager = null;
     }
@@ -51,7 +49,6 @@ public class Account {
         accountName = name;
         accountType = type;
         fullAcctNum = acctNum;
-        last4Acct = split(acctNum);
         accountBalance = bal;
         manager = null;
     }
@@ -82,13 +79,6 @@ public class Account {
     }
 
 
-    /**
-     * get the last for digits of the accounts number.
-     * @return the last four digits of the account number.
-     */
-    public int getLast4() {
-        return last4Acct;
-    }
 
     /**
      * get the current balance of an account
@@ -123,7 +113,6 @@ public class Account {
      */
     public void setAccountNum(int acctNum) {
         fullAcctNum = acctNum;
-        last4Acct = split(acctNum);
     }
 
 
@@ -169,7 +158,7 @@ public class Account {
         int res = 0; // the result holding out last four.
 
         // get the last four of the acct num using base 10 tactics.
-        for (x = list.size() - 4; x < list.size(); x++) {
+        for (x = list.size() - 4; x <= list.size(); x++) {
             res *= 10;
             res += list.get(x);
         }
@@ -205,7 +194,7 @@ public class Account {
     private String getFormattedInfo() {
         String info = "Account: " + accountName
                 + "\n\tType: " + accountType
-                + "\n\tLast 4 of Account Number: " + last4Acct
+                + "\n\tAccount Number: " + fullAcctNum
                 + "\n\t";
         info += String.format("The account balance is: .2%f", accountBalance);
         return info;
